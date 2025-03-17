@@ -1,10 +1,9 @@
-// You can edit this code!
-// Click here and start typing.
 package main
 
 import (
 	"fmt"
 	"math"
+	"runtime"
 	"strconv"
 	"time"
 )
@@ -34,14 +33,26 @@ var numerofloat float32 = 4.5
 var datobool bool = true
 
 func main() {
+	//-----PRACTICAS-------//
 	//practica_otra_forma_de_declarar_variables()
 	//practica_valor_por_defecto()
 	//practica_conversion_tipo_de_datos()
 	//practica_paquete_fmt()
 	//practica_operaciones_Aritmenticas()
-	//ejercicio_area_perimetro_triangulo()
 	//practica_operadores_booleanos()
-	practica_condicion_if_else()
+	//practica_condicion_if_else()
+	//practica_declaracion_switch()
+	//practica_bucle_for()
+	//saludo := practica_uso_de_funciones_saludo("yonh")
+	//fmt.Println(saludo)
+	//suma_res, multiplicacion_res := practica_uso_de_funciones_calculos1(35, 42)
+	//fmt.Printf("El resultado de la suma es %d y la multiplicacion es %d\n", suma_res, multiplicacion_res)
+	//sum_res, multi_res := practica_uso_de_funciones_calculos2(5, 6)
+	//fmt.Printf("El resultado de la suma es %d y la multiplicacion es %d\n", sum_res, multi_res)
+
+	//------EJERCICIOS-----------------------//
+	//ejercicio_area_perimetro_triangulo()
+	ejercicio_jugar_numero_aleatorio()
 }
 
 func practica_otra_forma_de_declarar_variables() {
@@ -133,28 +144,6 @@ func practica_operaciones_Aritmenticas() {
 
 }
 
-func ejercicio_area_perimetro_triangulo() {
-	//declaracion de variables
-	var altura, lado, hipotenusa, area, perimetro float32
-	const precision_decimal = 2
-
-	//Entrada de datos
-	fmt.Print("Ingrese el lado del triangulo: ")
-	fmt.Scanln(&lado)
-	fmt.Print("Ingrese la altura del triangulo: ")
-	fmt.Scanln(&altura)
-
-	//Calculos
-
-	hipotenusa = float32(math.Sqrt(math.Pow(float64(lado), 2) + math.Pow(float64(altura), 2)))
-	area = (lado * altura) / 2
-	perimetro = hipotenusa + lado + altura
-
-	//Salida de datos
-	fmt.Printf("Area: %.*f\n", precision_decimal, area)
-	fmt.Printf("Perimetro: %.*f\n", precision_decimal, perimetro)
-}
-
 func practica_operadores_booleanos() {
 	// Comparación de números
 	fmt.Println(1 == 1) // true
@@ -217,3 +206,77 @@ func practica_condicion_if_else() {
 		fmt.Println("¡Noche!")
 	}
 }
+
+func practica_declaracion_switch() {
+
+	os := runtime.GOOS //saber el sistema operativo
+	switch os {
+	case "windows":
+		fmt.Println("Go run -> Windows")
+	case "linux":
+		fmt.Println("Go run -> Linux")
+	case "darwin":
+		fmt.Println("Go run -> macOS")
+	default:
+		fmt.Println("Go run -> Otro OS")
+	}
+
+	//es lo mismo//
+
+	switch os := runtime.GOOS; os {
+	case "windows":
+		fmt.Println("Go run -> Windows")
+	case "linux":
+		fmt.Println("Go run -> Linux")
+	case "darwin":
+		fmt.Println("Go run -> macOS")
+	default:
+		fmt.Println("Go run -> Otro OS")
+	}
+
+	//similar al caso time del if//
+
+	switch t := time.Now(); {
+	case t.Hour() < 12:
+		fmt.Println("¡Mañana!")
+	case t.Hour() < 18:
+		fmt.Println("¡Tarde!")
+	default:
+		fmt.Println("¡Noche!")
+	}
+}
+
+func practica_bucle_for() {
+	var i int
+	for i <= 10 {
+		fmt.Println(i)
+		i++
+	}
+
+	for j := 1; j <= 10; j++ {
+		if j == 6 {
+			//break
+			continue
+		}
+		fmt.Println(j)
+	}
+}
+
+// Practica de funciones
+func practica_uso_de_funciones_saludo(name string) string {
+	return "Hola " + name
+}
+
+func practica_uso_de_funciones_calculos1(a, b int) (int, int) {
+	suma := a + b
+	multiplicacion := a * b
+	return suma, multiplicacion
+}
+
+func practica_uso_de_funciones_calculos2(a, b int) (suma, multi int) {
+	suma = a + b
+	multi = a * b
+	return
+}
+
+//fin Practica funciones
