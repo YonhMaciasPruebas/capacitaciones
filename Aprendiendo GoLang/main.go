@@ -46,9 +46,14 @@ func main() {
 	//practica_mapas()
 	//practica_estructura()
 	//practica_punteros_y_metodos()
+	//practica_manejo_de_errores()
+	//practica_uso_defer()
+	//practica_uso_panic_y_recover()
+	//practica_registro_de_errores()
 
 	//------EJERCICIOS-----------------------//
 	//ejercicio_area_perimetro_triangulo()
 	//ejercicio_jugar_numero_aleatorio()
-	ejercicio_gestor_de_tareas()
+	//ejercicio_gestor_de_tareas()
+	ejercicio_gestor_de_contactos()
 }

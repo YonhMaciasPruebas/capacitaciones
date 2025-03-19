@@ -1,8 +1,11 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"log"
 	"math"
+	"os"
 	"runtime"
 	"strconv"
 	"time"
@@ -360,4 +363,96 @@ func (c *Persona) saludar() { // METODO DE LA CLASE SE USA PUNTEROS
 	fmt.Printf("Hola, mi nombre es %s y tengo %d años\n", c.nombre, c.edad)
 }
 
-//-----HASTA AQUI HACE PARTE DE LA CLASE DE PUNTEROS Y METODOS
+// -----HASTA AQUI HACE PARTE DE LA CLASE DE PUNTEROS Y METODOS
+
+//------------------------------------------------------------------------------
+//SECCION 6 CONTROL DE ERRORES
+
+// comienza practica manejo de errores
+func practica_manejo_de_errores() {
+	/*str := "a"
+	num, error := strconv.Atoi(str)
+	if error != nil {
+		fmt.Println("Error: ", error)
+		return
+	}
+	fmt.Println("Número: ", num)*/
+
+	resultado, error := calcular_division(10, 0)
+	if error != nil {
+		fmt.Println("Error: ", error)
+		return
+	}
+	fmt.Println("Resultado: ", resultado)
+}
+func calcular_division(dividendo, divisor int) (int, error) {
+	if divisor == 0 {
+		return 0, errors.New("No se puede dividir por cero")
+		//return 0, fmt.Errorf("No se puede dividir por cero") // asi tambien se puede
+
+	}
+	return dividendo / divisor, nil
+}
+
+//finaliza practica manejo de errores
+
+func practica_uso_defer() {
+	file, err := os.Create("soy_un_archivo.txt")
+	if err != nil {
+		fmt.Println("Error: ", err)
+		return
+	}
+	defer file.Close() //esto hace que sea lo ultimo que se ejecute antes de que finalice main
+
+	_, err = file.Write([]byte("Hola, mundo soy yonh"))
+	if err != nil {
+		fmt.Println("Error: ", err)
+		return
+	}
+}
+
+// inicia practica uso de panic y recover
+func practica_uso_panic_y_recover() {
+	divide_panic(67, 4)
+	divide_panic(50, 5)
+	divide_panic(3, 0)
+	divide_panic(100, 6)
+
+}
+
+func divide_panic(dividendo, divisor int) {
+	//recupera el panic para permitir que la ejecucion no finalice sino trate el dato dañado y continue con los demas registros
+	defer func() {
+		if r := recover(); r != nil {
+			fmt.Println(r)
+		}
+	}()
+	validacionCero(divisor)
+	fmt.Println(dividendo / divisor)
+}
+
+func validacionCero(divisor int) {
+	if divisor == 0 {
+		panic("No es posible divir por cero")
+	}
+}
+
+//finaliza practica uso de panic y recover
+
+func practica_registro_de_errores() {
+	log.SetPrefix("practica_registro_de_errores(): ")                                 //colocar un prefijo, suele ser el nombre de la funcion para que en la traza quede como parte del log
+	file, error := os.OpenFile("info.log", os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0644) //nombrearchivo,si no existe lo crea, escribe registros si ya tiene,solo lo apertura en escritura,permisos de ejecucion
+	if error != nil {
+		log.Fatal(error)
+		//log.Fatal("OJO son un mensaje fatal")                                             //con este finaliza la ejecucion del programa
+		//log.Panic("OJO son un mensaje de panic")                                          //con este finaliza pero deja una traza de donde ocurrieron los errores
+
+	}
+	defer file.Close()
+
+	log.SetOutput(file) //para que no escriba en consola sino en el archivo info.log
+	log.Print("¡soy un registro del log!")
+	log.Print("Este es un mensaje de registro")
+	log.Println("Este es otro mensaje de registro")
+
+}
