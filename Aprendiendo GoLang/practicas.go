@@ -257,7 +257,7 @@ func practica_matrices() {
 
 }
 
-func practica_rebanadas() {
+func practica_rebanadas() { //tambien se le conoce como slice
 	diasSemana := []string{"Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"}
 	fmt.Println(diasSemana)
 	diasRebanada := diasSemana[2:4]
@@ -313,3 +313,51 @@ func practica_mapas() {
 		fmt.Printf("Clave: %s, Valor: %s\n", clave, dato)
 	}
 }
+
+func practica_estructura() {
+	type Persona struct {
+		nombre string
+		edad   int
+		correo string
+	}
+
+	var p Persona
+	p.nombre = "Yonh"
+	p.edad = 28
+	p.correo = "yonhmacias@outlook.com"
+
+	p1 := Persona{"Danna", 26, "danna@gmail.com"}
+
+	fmt.Println(p)
+	fmt.Println(p1)
+}
+
+//-----TODO ESTO HACE PARTE DE LA CLASE DE PUNTEROS Y METODOS
+
+func practica_punteros_y_metodos() {
+	var x int = 100
+	var pointer *int = &x
+
+	fmt.Println(x)
+	practica_editar_puntero(pointer)
+	fmt.Println(x)
+
+	p1 := Persona{"Danna", 26, "danna@gmail.com"} //objeto de la clase persona
+	p1.saludar()
+}
+
+func practica_editar_puntero(a *int) {
+	*a = 20
+}
+
+type Persona struct { //ESTRUCTURA TIPO CLASE CON ATRIBUTOS
+	nombre string
+	edad   int
+	correo string
+}
+
+func (c *Persona) saludar() { // METODO DE LA CLASE SE USA PUNTEROS
+	fmt.Printf("Hola, mi nombre es %s y tengo %d años\n", c.nombre, c.edad)
+}
+
+//-----HASTA AQUI HACE PARTE DE LA CLASE DE PUNTEROS Y METODOS

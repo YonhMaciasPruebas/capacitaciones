@@ -43,9 +43,12 @@ func main() {
 	//fmt.Printf("El resultado de la suma es %d y la multiplicacion es %d\n", sum_res, multi_res)
 	//practica_matrices()
 	//practica_rebanadas()
-	practica_mapas()
+	//practica_mapas()
+	//practica_estructura()
+	//practica_punteros_y_metodos()
 
 	//------EJERCICIOS-----------------------//
 	//ejercicio_area_perimetro_triangulo()
 	//ejercicio_jugar_numero_aleatorio()
+	ejercicio_gestor_de_tareas()
 }
