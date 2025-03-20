@@ -1,4 +1,0 @@
-go run "archivo .go" correr elprograma
-go build "archivo go" compila y crea el archivo binario paracorrerlo 
-go mod init "modulo" administrador de modulos
-go get "nombre repositorio de paquete" agregar paquetes al proyecto
